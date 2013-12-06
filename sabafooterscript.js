@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
 
 	 
 	/*Certifications Detail changes*/
-	if($("div.sbMainContentArea.wdk_learnerCertificationDetail").length>0){
+	if(jQuery("div.sbMainContentArea.wdk_learnerCertificationDetail").length>0){
 		/*hide the More Actions widget on the certification detail page*/
 		$("div.wdk_learnerCertificationDetail table[name*='navtable']").css("display","none");
 		

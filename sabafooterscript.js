@@ -76,4 +76,4 @@ jQuery(document).ready(function($){
 	/*Make Register links in Cert Learning Offerings table look like green buttons */
 	$("table[summary='Table Data:Learning Offerings'] a.sbLinkGeneral:contains('Register')").addClass("registerbtn");
 	$("table[summary='Table Data:Learning Offerings'] a.sbLinkGeneral:contains('Launch')").addClass("registerbtn");
-}) //end document ready
+});//end document ready

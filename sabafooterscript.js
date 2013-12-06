@@ -31,7 +31,7 @@ jQuery(document).ready(function($){
 			"margin-left": "10px"
 		});
 		
-		$("span.sbContainerPageHeadingText:contains('Progress')").css({
+		jQuery("span.sbContainerPageHeadingText:contains('Progress')").css({
 			"font-size": "12px", 
 			"margin-left": "10px"
 		});

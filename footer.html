@@ -1,0 +1,164 @@
+ <style>
+ .sbCompleteCell {
+    background-color: #EBEBEB;
+    vertical-align: middle;
+}
+
+.sbNotEnrolledCell {
+	background-color: #DEF4D9;
+	vertical-align:middle;
+}
+.sbContainerPageHeadingText {
+	font-size:18px;
+}
+
+.sbBoxDarkBorder{
+	background:none;
+	border-top:1px solid #CCCCCC;
+
+}
+ 
+.registerbtn {
+	-moz-box-shadow:inset 0px 1px 0px 0px #caefab;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #caefab;
+	box-shadow:inset 0px 1px 0px 0px #caefab;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811) );
+	background:-moz-linear-gradient( center top, #77d42a 5%, #5cb811 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#77d42a", endColorstr="#5cb811");
+	background-color:#77d42a;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0;
+	border:1px solid #268a16;
+	display:inline-block;
+	color:#306108;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #aade7c;
+}
+.registerbtn:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
+	background:-moz-linear-gradient( center top, #5cb811 5%, #77d42a 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5cb811", endColorstr="#77d42a");
+	background-color:#5cb811;
+}.registerbtn:active {
+	position:relative;
+	top:1px;
+} 
+ 
+</style>
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+ 
+
+<script>
+//use non-conflicting jquery wrapper
+var jq = jQuery.noConflict();
+jq(document).ready(
+	function($){ 
+	 
+	/*Certifications Detail changes*/
+	if($("div.sbMainContentArea.wdk_learnerCertificationDetail").length>0){
+		/*hide the More Actions widget on the certification detail page*/
+		$("div.wdk_learnerCertificationDetail table[name*='navtable']").css("display","none");
+		
+		/*hide main tab bar*/
+		$("div.sbMainContentArea.wdk_learnerCertificationDetail div.sbMultiSectionTopContainer").parents("table")[0].remove();
+		/*gray out "request learning links on certification detail page*/
+		$("div.sbMainContentArea.wdk_learnerCertificationDetail a.sbLinkGeneral:contains('RequestLearning')").css("font-size","9pt !important").css("color","#CCCCCC");
+		/*Make Register links in Cert table look like green buttons */
+		$("span.sbLinkTableDisplay a.sbLinkTableDisplay:contains('Register')").addClass("registerbtn");
+		$("span.sbLinkTableDisplay a.sbLinkTableDisplay:contains('View Progress')").addClass("registerbtn");
+		/*make "Sections" heading in certs bigger and add space to separate it from stuff above*/
+		$( "td.sbContainerPageHeadingText:contains('Sections')" ).css( {
+			"font-size":"24px",
+			"padding-top":"24px"
+		});
+
+		/*sbMainContentArea wdk_learnerCertificationDetail certification detail area*/
+		$( "span.sbContainerPageHeadingText:contains('Completion Requirement')" ).css({
+			"font-size": "12px", 
+			"margin-left": "10px"
+		});
+		
+		$("span.sbContainerPageHeadingText:contains('Status')").css({
+			 "font-size": "12px", 
+			"margin-left": "10px"
+		});
+		
+		$("span.sbContainerPageHeadingText:contains('Progress')").css({
+			"font-size": "12px", 
+			"margin-left": "10px"
+		});
+		
+		$("span.sbContainerPageHeadingText:contains('Percentage Completed:')").css({
+			"font-size": "12px", 
+			"margin-left": "10px"
+		});
+		
+		/*change font size of headings on detail page*/
+		$("span.sbContainerPageHeadingText font").css( "font-size", "20px"); 
+		$("span.sbContainerPageHeadingText font").css( "padding-bottom", "10px"); 
+		$("span.sbMainPageSubHeaderText font").css( "font-size", "20px"); 
+		$("span.sbMainPageSubHeaderText font").css( "padding-top", "10px");
+		$("span.sbMainPageSubHeaderText font").css( "padding-bottom", "2px");  
+		
+		/*make the complete title of the link show up in the link instead of the truncated version*/
+		 $("td").find("a.sbLinkTableDisplay").filter(':contains("...")').each(
+			function(){
+				$(this).text($(this).attr("title"));
+			}
+		 ); 
+		$("span.sbLinkTableDisplay").parent("td").css("vertical-align","middle");  
+				
+	}//end Certifications Detail changes
+	
+ 
+	
+	/*hide Version and Recertification columns in Certifications Portlet*/
+	if($("table.certificationPortlet").length>0){
+		$("table.certificationPortlet table#idData_simpleTable td.sbListOddCell:nth-child(3)").hide();
+		$("table.certificationPortlet table#idData_simpleTable td.sbListOddCell:nth-child(6)").hide();
+		$("table.certificationPortlet  table#idData_simpleTable .sbListPorletEvenCell:nth-child(3)").hide();
+		$("table.certificationPortlet  table#idData_simpleTable .sbListPorletEvenCell:nth-child(6)").hide();
+		$("table.certificationPortlet  table#idData_simpleTable th.sbListPortletContentHeaderCell:nth-child(3)").hide();
+		$("table.certificationPortlet  table#idData_simpleTable th.sbListPortletContentHeaderCell:nth-child(6)").hide();
+	}
+	/*increase font size in left nav*/
+	$(".left-nav-panel").css("font-size","14px")		 	
+	
+	/*Make Register links in Cert Learning Offerings table look like green buttons */
+	$("table[summary='Table Data:Learning Offerings'] a.sbLinkGeneral:contains('Register')").addClass("registerbtn");
+	$("table[summary='Table Data:Learning Offerings'] a.sbLinkGeneral:contains('Launch')").addClass("registerbtn");
+}) //end document ready
+	
+</script> 
+<div style="background-color:#025297;position:relative;width:auto;height:120px;padding:8px 8px 8px 220px;">
+<p style="color:#FFFFFF;font-size: 10px; font-family: Arial; text-align: left"><a href="http://medicine.umich.edu/medschool/" target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">  U-M Medical School  </a> | <a href="http://www.uofmhealth.org/our-locations" target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">Hospitals & Health Centers</a> | <a href="http://www.nursing.umich.edu/" target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">U-M School of Nursing</a> | <a href="http://www.umich.edu/" target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">U-M</a>
+<br><br>
+University of Michigan Health System, 1500 E. Medical Center Drive Ann Arbor, MI 48109 734-938-4000</br>
+(c)copyright 2013 Regents of the University of Michigan / Template developed & maintained by: Public Relations & Marketing Communcations. <a href="http://med.umich.edu/umhs/contact-us/index.html" target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">Contact UMHS</a>
+<br><br>
+The University of Michigan Health System Web site does not provide specific medical advice and does not endorse any medical or professional service <br>obtained through information provided on this site or any links to this site. <a href="http://www.uofmhealth.org/general-information/disclaimer" target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">Complete disclaimer</a> and <a href="http://med.umich.edu/umhs/disclaimers/privacy.html " target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">Privacy Statement</a>
+<br><br>
+<a href="http://sabapeoplecloud.com/support/index.php/SCR71%3AHome?buildNumber=SEC" target="_blank" style="color:#F5F5F5;font-size: 10px; font-family: Arial">Saba Help</a>
+</p>
+
+</div>
+

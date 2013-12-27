@@ -1,3 +1,4 @@
+//this file is for testing use of externally hosted scripts with saba theme. Not currently in use.
 //use non-conflicting jquery wrapper
 jQuery(document).ready(function($){
  

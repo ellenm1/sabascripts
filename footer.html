@@ -17,7 +17,10 @@
 	border-top:1px solid #CCCCCC;
 
 }
- 
+a.sbWDKButton {
+
+
+} 
 .registerbtn {
 	-moz-box-shadow:inset 0px 1px 0px 0px #caefab;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #caefab;
@@ -69,17 +72,29 @@
 
 <script>
 //use non-conflicting jquery wrapper
+
+if (typeof console == "undefined" || typeof console.log == "undefined") var console = { log: function() {} }; 
+
 var jq = jQuery.noConflict();
 jq(document).ready(
 	function($){ 
 	 
+	/*knowledgebase file description - make HTML render correctly*/
+		
+	if($("div.sbMainContentArea.wdk_inventoryDetail").length>0){
+		var aa = 	$("div.sbMainContentArea.wdk_inventoryDetail span.sbOptionalInputLabel:contains('Description')").parent("td").next().find("span.sbAttributeValue");		
+		$("div.sbMainContentArea.wdk_inventoryDetail span.sbOptionalInputLabel:contains('Description')").parent("td").next().find("span.sbAttributeValue").html($(aa).text());
+	 	}
+	
 	/*Certifications Detail changes*/
 	if($("div.sbMainContentArea.wdk_learnerCertificationDetail").length>0){
 		/*hide the More Actions widget on the certification detail page*/
 		$("div.wdk_learnerCertificationDetail table[name*='navtable']").css("display","none");
 		
-		/*hide main tab bar*/
-		$("div.sbMainContentArea.wdk_learnerCertificationDetail div.sbMultiSectionTopContainer").parents("table")[0].remove();
+		/*hide main tab bar Note: remove() and css fail on parents("table")[0] - remove fails in IE and css fails in FF*/
+		/*http://stackoverflow.com/questions/18919560/object-doesnt-support-property-or-method-remove*/
+		//	$("div.sbMainContentArea.wdk_learnerCertificationDetail div.sbMultiSectionTopContainer").parents("table")[0].css("display","none");
+		$("div.sbMainContentArea.wdk_learnerCertificationDetail div.sbMultiSectionTopContainer").parent().parent().parent().parent().css("display","none");
 		/*gray out "request learning links on certification detail page*/
 		$("div.sbMainContentArea.wdk_learnerCertificationDetail a.sbLinkGeneral:contains('RequestLearning')").css("font-size","9pt !important").css("color","#CCCCCC");
 		/*Make Register links in Cert table look like green buttons */
@@ -90,6 +105,12 @@ jq(document).ready(
 			"font-size":"24px",
 			"padding-top":"24px"
 		});
+
+	
+	if($("div.wdk_teamCertificationMatrix").length>0){
+		$("th.sbListHeaderCell").attr('nowrap','');
+	}
+
 
 		/*sbMainContentArea wdk_learnerCertificationDetail certification detail area*/
 		$( "span.sbContainerPageHeadingText:contains('Completion Requirement')" ).css({
@@ -140,12 +161,17 @@ jq(document).ready(
 		$("table.certificationPortlet  table#idData_simpleTable th.sbListPortletContentHeaderCell:nth-child(3)").hide();
 		$("table.certificationPortlet  table#idData_simpleTable th.sbListPortletContentHeaderCell:nth-child(6)").hide();
 	}
+	
 	/*increase font size in left nav*/
 	$(".left-nav-panel").css("font-size","14px")		 	
 	
 	/*Make Register links in Cert Learning Offerings table look like green buttons */
 	$("table[summary='Table Data:Learning Offerings'] a.sbLinkGeneral:contains('Register')").addClass("registerbtn");
 	$("table[summary='Table Data:Learning Offerings'] a.sbLinkGeneral:contains('Launch')").addClass("registerbtn");
+if($("a.sbWDKButton:contains('Launch')").length>0){
+	$("a.sbWDKButton:contains('Launch')").addClass("registerbtn").removeClass("sbWDKButton");
+	}
+
 }) //end document ready
 	
 </script> 

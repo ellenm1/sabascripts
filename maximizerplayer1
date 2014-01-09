@@ -1,0 +1,29 @@
+//used for "822x1201_blank" player for Saba scorm content 
+//paste this in footer section of player
+//it maximizes player up to 1280 in width or 1024 in height
+
+<script>
+if (typeof console == "undefined" || typeof console.log == "undefined") var console = { log: function() {} }; 
+	console.log('screen.availWidth='+screen.availWidth+', screen.availHeight='+screen.availHeight+',  window.height ='+ top.window.height+' window.outerHeight='+top.window.outerHeight)
+var doc = document;
+var theHeight = Math.max(
+    doc.body.scrollHeight, doc.documentElement.scrollHeight,
+    doc.body.offsetHeight, doc.documentElement.offsetHeight,
+    doc.body.clientHeight, doc.documentElement.clientHeight
+);
+var theWidth = Math.max(
+	 doc.body.scrollWidth, doc.documentElement.scrollWidth,
+    doc.body.offsetWidth, doc.documentElement.offsetWidth,
+    doc.body.clientWidth, doc.documentElement.clientWidth
+);
+top.window.moveTo(0,0);
+if (document.all) { top.window.resizeTo(screen.availWidth,screen.availHeight); }
+
+else {
+	  if ((theHeight < screen.availHeight)||(top.window.outerWidth < screen.availWidth)){
+	  console.log('in else statement and theHeight = '+theHeight+ ', theWidth='+theWidth);
+	    top.window.Height = (theHeight>1024)?1024:theHeight;
+	    top.window.Width = (theWidth>1280)?1280:theWidth;
+	}
+}
+</script>
